@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -9,14 +9,6 @@ export const metadata: Metadata = {
   description: "Générez du contenu viral et analysez vos campagnes avec NexMark.",
 };
 
-// C'est ICI la correction magique pour le mobile !
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,6 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        {/* C'est cette ligne qui force le zoom mobile à 100% */}
+        <meta 
+          name="viewport" 
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" 
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
